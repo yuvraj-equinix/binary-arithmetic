@@ -5,7 +5,6 @@ def decimal_to_binary(num):
         num = num // 2
     return bin
 
-
 def binary_to_decimal(arr):
     is_negative = False
     if arr[0] == 1:
@@ -26,12 +25,12 @@ def complement_2(arr):
     return add(ans, decimal_to_binary(1))
 
 
-def add(a, b):
+def add(bin1, bin2):
     ans = [0] * 32
     carry, i = 0, 31
     while i >= 0:
-        sum = a[i]
-        sum += b[i]
+        sum = bin1[i]
+        sum += bin2[i]
         sum += carry
 
         ans[i] = sum % 2
@@ -41,27 +40,27 @@ def add(a, b):
     return ans
 
 
-def sub(a, b):
-    c = complement_2(b)
-    ans = add(a, c)
+def sub(bin1, bin2):
+    c = complement_2(bin2)
+    ans = add(bin1, c)
     return ans
 
 
-def mul(a, b):
+def mul(bin1, bin2):
     is_negative = False
-    a_decimal = binary_to_decimal(a)
-    b_decimal = binary_to_decimal(b)
+    a_decimal = binary_to_decimal(bin1)
+    b_decimal = binary_to_decimal(bin2)
     if a_decimal < 0 and b_decimal > 0 or b_decimal < 0 and a_decimal > 0:
         is_negative = True
     ans = [0] * 32
     for i in range(abs(b_decimal)):
-        ans = add(ans, a)
+        ans = add(ans, bin1)
     if is_negative:
         return complement_2(ans)
     return ans
 
 
-def div(a, b):
+def div(bin1, bin2):
     pass
 
 
