@@ -66,8 +66,28 @@ def div(bin1, bin2):
     pass
 
 
-a = decimal_to_binary(3)
-b = decimal_to_binary(-5)
-ans = mul(a, b)
-print(ans)
-print(binary_to_decimal(ans))
+while True:
+    print("Enter the First Number")
+    num1 = int(input())
+    bin1 = decimal_to_binary(num1)
+    print("Enter the Second Number")
+    num2 = int(input())
+    bin2 = decimal_to_binary(num2)
+    print("Enter the Operator")
+    operator = input()
+
+    if operator == '+':
+        ans = add(bin1, bin2)
+        print(binary_to_decimal(ans))
+    elif operator == '-':
+        ans = sub(bin1, bin2)
+        print(binary_to_decimal(ans))
+    elif operator == '*':
+        ans = mul(bin1, bin2)
+        print(binary_to_decimal(ans))
+    elif operator == '/':
+        ans = div(bin1, bin2)
+        print(binary_to_decimal(ans))
+    else:
+        print("Invalid Input")
+    
