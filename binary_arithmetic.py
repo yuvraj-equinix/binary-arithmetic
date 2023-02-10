@@ -12,12 +12,17 @@ def binary_to_decimal(arr):
     return num
 
 def complement_2(arr):
-    pass
+    ans = arr[:]
+    for i in range(32):
+        ans[i] = 0 if arr[i] == 1 else 1
+    return Binary(binary_to_decimal(ans), 1).add()
 
 class Binary:
     def __init__(self, a, b):
         self.a = decimal_to_binary(a)
         self.b = decimal_to_binary(b)
+        self.a_decimal = a
+        self.b_decimal = b
     
     def add(self):
         pass
@@ -35,5 +40,7 @@ class Binary:
 
 ans = decimal_to_binary(7)
 ans2 = binary_to_decimal(ans)
+ans3 = complement_2(ans)
 print(ans)
 print(ans2)
+print(ans3)
