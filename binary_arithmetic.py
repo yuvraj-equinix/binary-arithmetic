@@ -15,32 +15,36 @@ def complement_2(arr):
     ans = arr[:]
     for i in range(32):
         ans[i] = 0 if arr[i] == 1 else 1
-    return Binary(binary_to_decimal(ans), 1).add()
+    return add(ans, decimal_to_binary(1))
 
-class Binary:
-    def __init__(self, a, b):
-        self.a = decimal_to_binary(a)
-        self.b = decimal_to_binary(b)
-        self.a_decimal = a
-        self.b_decimal = b
+def add(a, b):
+    ans = [0]*32
+    carry, i = 0, 31
+    while i >= 0:
+        sum = a[i]
+        sum += b[i]
+        sum += carry
+        
+        ans[i] = sum%2
+        carry = sum//2
     
-    def add(self):
-        pass
-        
-    def sub(self):
-        pass
-        
-    def mul(self):
-        pass
-        
-    def div(self):
-        pass
-        
+        i -= 1
+    return ans
+    
+def sub(a, b):
+    c = complement_2(b)
+    ans = add(a, c)
+    return ans
+    
+def mul(a, b):
+    pass
+    
+def div(a, b):
+    pass
+    
 
 
-ans = decimal_to_binary(7)
-ans2 = binary_to_decimal(ans)
-ans3 = complement_2(ans)
+a = decimal_to_binary(-6)
+b = decimal_to_binary(-4)
+ans = sub(a, b)
 print(ans)
-print(ans2)
-print(ans3)
