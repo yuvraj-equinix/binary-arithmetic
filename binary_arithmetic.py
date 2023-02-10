@@ -1,26 +1,34 @@
+def decimal_to_binary(num):
+    bin = [0] * 32
+    for i in range(31, -1, -1):
+        bin[i] = num % 2
+        num = num // 2
+    return bin
+    
+def binary_to_decimal(self, arr):
+    pass
+
+def complement_2(arr):
+    pass
+
 class Binary:
     def __init__(self, a, b):
         self.a = decimal_to_binary(a)
         self.b = decimal_to_binary(b)
     
-    def add(self, a, b):
+    def add(self):
         pass
         
-    def sub(self, a, b):
+    def sub(self):
         pass
         
-    def mul(self, a, b):
+    def mul(self):
         pass
         
-    def div(self, a, b):
+    def div(self):
         pass
         
-    def decimal_to_binary(self, num):
-        bin_a = [0] * 32
-        bin_b = [0] * 32
-        for i in range(31, -1, -1):
-            bin_a[i] = num % 2
-            # todo
-        
-    def binary_to_decimal(self, arr):
-        pass
+
+
+ans = decimal_to_binary(5)
+print(ans)
