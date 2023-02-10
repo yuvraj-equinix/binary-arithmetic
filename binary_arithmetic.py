@@ -5,8 +5,11 @@ def decimal_to_binary(num):
         num = num // 2
     return bin
     
-def binary_to_decimal(self, arr):
-    pass
+def binary_to_decimal(arr):
+    num = 0
+    for i in range(32):
+        num = num + arr[i] * 2**(31-i)
+    return num
 
 def complement_2(arr):
     pass
@@ -30,5 +33,7 @@ class Binary:
         
 
 
-ans = decimal_to_binary(5)
+ans = decimal_to_binary(7)
+ans2 = binary_to_decimal(ans)
 print(ans)
+print(ans2)
