@@ -32,7 +32,7 @@ def complement_2(arr):
     ans = arr[:]
     for i in range(NUMBER_LENGTH):
         ans[i] = 0 if arr[i] == 1 else 1
-    return add(ans, decimal_to_binary(1))
+    return Addition(ans, decimal_to_binary(1))
 
 
 def Addition(bin1, bin2):
@@ -52,7 +52,7 @@ def Addition(bin1, bin2):
 
 def Substraction(bin1, bin2):
     c = complement_2(bin2)
-    ans = add(bin1, c)
+    ans = Addition(bin1, c)
     return ans
 
 
@@ -76,7 +76,7 @@ def Multiplication(bin1, bin2):
             if k > -1:
                curr_multiplication[k] = bin2[i] and bin1[j]
                k -= 1
-        ans = add(ans, curr_multiplication)
+        ans = Addition(ans, curr_multiplication)
 
     if is_negative:
         return complement_2(ans)
@@ -84,7 +84,13 @@ def Multiplication(bin1, bin2):
 
 
 def Division(bin1, bin2):
-    pass
+    count = 0
+    while binary_to_decimal(bin1) >= binary_to_decimal(bin2):
+        bin1 = Substraction(bin1, bin2)
+        count += 1
+    
+    ans = decimal_to_binary(count)
+    return ans
 
 def factorial(bin):
     number = binary_to_decimal(bin)
@@ -97,31 +103,45 @@ def factorial(bin):
 def Power(bin):
     pass
 
-def Modulus(bin):
-    pass
+def Modulus(bin1, bin2):
+    num1 = binary_to_decimal(bin1)
+    num2 = binary_to_decimal(bin2)
 
-while True:
-    print("Enter the First Number")
-    num1 = int(input())
-    bin1 = decimal_to_binary(num1)
-    print("Enter the Second Number")
-    num2 = int(input())
-    bin2 = decimal_to_binary(num2)
-    print("Enter the Operator")
-    operator = input()
+    ans = num1 % num2
+    return decimal_to_binary(ans)
 
-    if operator == '+':
-        ans = Addition(bin1, bin2)
-        print(binary_to_decimal(ans))
-    elif operator == '-':
-        ans = Substraction(bin1, bin2)
-        print(binary_to_decimal(ans))
-    elif operator == '*':
-        ans = Multiplication(bin1, bin2)
-        print(binary_to_decimal(ans))
-    elif operator == '/':
-        ans = Division(bin1, bin2)
-        print(binary_to_decimal(ans))
-    else:
-        print("Invalid Input")
+    
+a = decimal_to_binary(3)
+b = decimal_to_binary(5)
+print(Division(a, b))
+print(Addition(a, b))
+print(Substraction(a, b))
+print(Multiplication(a, b))
+print(Modulus(a, b))
+
+
+# while True:
+#     print("Enter the First Number")
+#     num1 = int(input())
+#     bin1 = decimal_to_binary(num1)
+#     print("Enter the Second Number")
+#     num2 = int(input())
+#     bin2 = decimal_to_binary(num2)
+#     print("Enter the Operator")
+#     operator = input()
+
+#     if operator == '+':
+#         ans = Addition(bin1, bin2)
+#         print(binary_to_decimal(ans))
+#     elif operator == '-':
+#         ans = Substraction(bin1, bin2)
+#         print(binary_to_decimal(ans))
+#     elif operator == '*':
+#         ans = Multiplication(bin1, bin2)
+#         print(binary_to_decimal(ans))
+#     elif operator == '/':
+#         ans = Division(bin1, bin2)
+#         print(binary_to_decimal(ans))
+#     else:
+#         print("Invalid Input")
     
