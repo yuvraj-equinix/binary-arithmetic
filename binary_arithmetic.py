@@ -1,3 +1,6 @@
+# import colorama
+# from colorama import Fore
+
 NUMBER_LENGTH = 32
 
 def decimal_to_binary(num):
@@ -100,7 +103,7 @@ def factorial(bin):
     
     return decimal_to_binary(ans)
 
-def Power(bin):
+def Power(bin1, bin2):
     pass
 
 def Modulus(bin1, bin2):
@@ -110,38 +113,49 @@ def Modulus(bin1, bin2):
     ans = num1 % num2
     return decimal_to_binary(ans)
 
-    
-a = decimal_to_binary(3)
-b = decimal_to_binary(5)
-print(Division(a, b))
-print(Addition(a, b))
-print(Substraction(a, b))
-print(Multiplication(a, b))
-print(Modulus(a, b))
+while True:
+    print("Select Operation")
+    print("1. Addition")
+    print("2. Substraction")
+    print("3. Multiplication")
+    print("4. Division")
+    print("5. Factorial")
+    print("6. Power")
+    print("7. Modulus")
+    print("8. Exit")
 
+    operator = int(input())
+    if operator == 8:
+        break
+    print("Enter the First Number")
+    num1 = int(input())
+    bin1 = decimal_to_binary(num1)
+    if operator != 5:
+       print("Enter the Second Number")
+       num2 = int(input())
+       bin2 = decimal_to_binary(num2)
 
-# while True:
-#     print("Enter the First Number")
-#     num1 = int(input())
-#     bin1 = decimal_to_binary(num1)
-#     print("Enter the Second Number")
-#     num2 = int(input())
-#     bin2 = decimal_to_binary(num2)
-#     print("Enter the Operator")
-#     operator = input()
-
-#     if operator == '+':
-#         ans = Addition(bin1, bin2)
-#         print(binary_to_decimal(ans))
-#     elif operator == '-':
-#         ans = Substraction(bin1, bin2)
-#         print(binary_to_decimal(ans))
-#     elif operator == '*':
-#         ans = Multiplication(bin1, bin2)
-#         print(binary_to_decimal(ans))
-#     elif operator == '/':
-#         ans = Division(bin1, bin2)
-#         print(binary_to_decimal(ans))
-#     else:
-#         print("Invalid Input")
+    if operator == 1:
+        ans = Addition(bin1, bin2)
+        print(binary_to_decimal(ans))
+    elif operator == 2:
+        ans = Substraction(bin1, bin2)
+        print(binary_to_decimal(ans))
+    elif operator == 3:
+        ans = Multiplication(bin1, bin2)
+        print(binary_to_decimal(ans))
+    elif operator == 4:
+        ans = Division(bin1, bin2)
+        print(binary_to_decimal(ans))
+    elif operator == 5:
+        ans = factorial(bin1)
+        print(binary_to_decimal(ans))
+    elif operator == 6:
+        ans = Power(bin1, bin2)
+        print(binary_to_decimal(ans))
+    elif operator == 7:
+        ans = Modulus(bin1, bin2)
+        print(binary_to_decimal(ans))
+    else:
+        print("Invalid Input")
     
