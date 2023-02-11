@@ -1,10 +1,18 @@
 NUMBER_LENGTH = 32
 
 def decimal_to_binary(num):
+    is_negative = False
+    if num < 0:
+        is_negative = True
+        num = num*(-1)
+
     bin = [0] * NUMBER_LENGTH
     for i in range(NUMBER_LENGTH - 1, -1, -1):
         bin[i] = num % 2
         num = num // 2
+
+    if is_negative:
+        bin = complement_2(bin)
     return bin
 
 def binary_to_decimal(arr):
@@ -27,7 +35,7 @@ def complement_2(arr):
     return add(ans, decimal_to_binary(1))
 
 
-def add(bin1, bin2):
+def Addition(bin1, bin2):
     ans = [0] * NUMBER_LENGTH
     carry, i = 0, NUMBER_LENGTH - 1
     while i >= 0:
@@ -42,13 +50,13 @@ def add(bin1, bin2):
     return ans
 
 
-def sub(bin1, bin2):
+def Substraction(bin1, bin2):
     c = complement_2(bin2)
     ans = add(bin1, c)
     return ans
 
 
-def mul(bin1, bin2):
+def Multiplication(bin1, bin2):
     is_negative = False
     a_decimal = binary_to_decimal(bin1)
     b_decimal = binary_to_decimal(bin2)
@@ -75,7 +83,7 @@ def mul(bin1, bin2):
     return ans
 
 
-def div(bin1, bin2):
+def Division(bin1, bin2):
     pass
 
 def factorial(bin):
@@ -85,6 +93,12 @@ def factorial(bin):
         ans *= i
     
     return decimal_to_binary(ans)
+
+def Power(bin):
+    pass
+
+def Modulus(bin):
+    pass
 
 while True:
     print("Enter the First Number")
@@ -97,16 +111,16 @@ while True:
     operator = input()
 
     if operator == '+':
-        ans = add(bin1, bin2)
+        ans = Addition(bin1, bin2)
         print(binary_to_decimal(ans))
     elif operator == '-':
-        ans = sub(bin1, bin2)
+        ans = Substraction(bin1, bin2)
         print(binary_to_decimal(ans))
     elif operator == '*':
-        ans = mul(bin1, bin2)
+        ans = Multiplication(bin1, bin2)
         print(binary_to_decimal(ans))
     elif operator == '/':
-        ans = div(bin1, bin2)
+        ans = Division(bin1, bin2)
         print(binary_to_decimal(ans))
     else:
         print("Invalid Input")
