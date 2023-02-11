@@ -52,11 +52,24 @@ def mul(bin1, bin2):
     is_negative = False
     a_decimal = binary_to_decimal(bin1)
     b_decimal = binary_to_decimal(bin2)
-    if a_decimal < 0 and b_decimal > 0 or b_decimal < 0 and a_decimal > 0:
-        is_negative = True
+
+    if a_decimal < 0:
+        bin1 = complement_2(bin1)
+        is_negative = not is_negative
+    if b_decimal < 0:
+        bin2 = complement_2(bin2)
+        is_negative = not is_negative
+
     ans = [0] * NUMBER_LENGTH
-    for i in range(abs(b_decimal)):
-        ans = add(ans, bin1)
+    for i in range(NUMBER_LENGTH - 1, -1, -1):
+        curr_multiplication = [0]*NUMBER_LENGTH
+        k = i
+        for j in range(NUMBER_LENGTH - 1, -1, -1):
+            if k > -1:
+               curr_multiplication[k] = bin2[i] and bin1[j]
+               k -= 1
+        ans = add(ans, curr_multiplication)
+
     if is_negative:
         return complement_2(ans)
     return ans
