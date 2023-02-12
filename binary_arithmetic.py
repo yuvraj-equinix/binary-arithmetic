@@ -127,9 +127,10 @@ def power_binary(bin1, bin2):
 
 
 def mod_binary(bin1, bin2):
-    dividend_bin = div_binary(bin1, bin2)
-    remainder_bin = sub_binary(bin1, multiply_binary(dividend_bin, bin2))
-    return remainder_bin
+    while binary_to_decimal(bin1) >= binary_to_decimal(bin2):
+        bin1 = sub_binary(bin1, bin2)
+    
+    return bin1
 
 
 while True:
