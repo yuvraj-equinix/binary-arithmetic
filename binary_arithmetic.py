@@ -1,6 +1,15 @@
 NUMBER_LENGTH = 32
 
 
+def get_integer_input(n):
+    res = []
+    for i in range(1, n + 1):
+        print(f"Enter the {i}th number")
+        num = int(input())
+        res.append(decimal_to_binary(num))
+    return res
+
+
 def decimal_to_binary(num):
     is_negative = False
     if num < 0:
@@ -118,11 +127,9 @@ def power_binary(bin1, bin2):
 
 
 def mod_binary(bin1, bin2):
-    decimal1 = binary_to_decimal(bin1)
-    decimal2 = binary_to_decimal(bin2)
-
-    ans = decimal1 % decimal2
-    return decimal_to_binary(ans)
+    dividend_bin = div_binary(bin1, bin2)
+    remainder_bin = sub_binary(bin1, multiply_binary(dividend_bin, bin2))
+    return remainder_bin
 
 
 while True:
@@ -134,39 +141,30 @@ while True:
     print("! => Factorial")
     print("^ => Power")
     print("% => Modulus")
-    print("q => Exit")
+    print("[anything else] => Exit")
 
     operator = input()
-    if operator == "q":
-        break
-    print("Enter the First Number")
-    num1 = int(input())
-    bin1 = decimal_to_binary(num1)
-    if operator != "!":
-        print("Enter the Second Number")
-        num2 = int(input())
-        bin2 = decimal_to_binary(num2)
-
     if operator == "+":
+        bin1, bin2 = get_integer_input(2)
         ans = add_binary(bin1, bin2)
-        print(binary_to_decimal(ans))
     elif operator == "-":
+        bin1, bin2 = get_integer_input(2)
         ans = sub_binary(bin1, bin2)
-        print(binary_to_decimal(ans))
     elif operator == "*":
+        bin1, bin2 = get_integer_input(2)
         ans = multiply_binary(bin1, bin2)
-        print(binary_to_decimal(ans))
     elif operator == "/":
+        bin1, bin2 = get_integer_input(2)
         ans = div_binary(bin1, bin2)
-        print(binary_to_decimal(ans))
     elif operator == "!":
+        bin1 = get_integer_input(1)[0]
         ans = factorial_binary(bin1)
-        print(binary_to_decimal(ans))
     elif operator == "^":
+        bin1, bin2 = get_integer_input(2)
         ans = power_binary(bin1, bin2)
-        print(binary_to_decimal(ans))
     elif operator == "%":
+        bin1, bin2 = get_integer_input(2)
         ans = mod_binary(bin1, bin2)
-        print(binary_to_decimal(ans))
     else:
-        print("Invalid Input")
+        break
+    print("Result: ", binary_to_decimal(ans), "\n\n")
