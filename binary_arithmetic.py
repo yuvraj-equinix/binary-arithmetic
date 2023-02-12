@@ -1,10 +1,11 @@
 NUMBER_LENGTH = 32
 
+
 def decimal_to_binary(num):
     is_negative = False
     if num < 0:
         is_negative = True
-        num = num*(-1)
+        num = num * (-1)
 
     bin = [0] * NUMBER_LENGTH
     for i in range(NUMBER_LENGTH - 1, -1, -1):
@@ -14,6 +15,7 @@ def decimal_to_binary(num):
     if is_negative:
         bin = complement_2(bin)
     return bin
+
 
 def binary_to_decimal(arr):
     is_negative = False
@@ -56,26 +58,26 @@ def sub_binary(bin1, bin2):
     return ans
 
 
-def mul_binary(bin1, bin2):
+def multiply_binary(bin1, bin2):
     is_negative = False
-    a_decimal = binary_to_decimal(bin1)
-    b_decimal = binary_to_decimal(bin2)
+    decimal1 = binary_to_decimal(bin1)
+    decimal2 = binary_to_decimal(bin2)
 
-    if a_decimal < 0:
+    if decimal1 < 0:
         bin1 = complement_2(bin1)
         is_negative = not is_negative
-    if b_decimal < 0:
+    if decimal2 < 0:
         bin2 = complement_2(bin2)
         is_negative = not is_negative
 
     ans = [0] * NUMBER_LENGTH
     for i in range(NUMBER_LENGTH - 1, -1, -1):
-        curr_multiplication = [0]*NUMBER_LENGTH
+        curr_multiplication = [0] * NUMBER_LENGTH
         k = i
         for j in range(NUMBER_LENGTH - 1, -1, -1):
             if k > -1:
-               curr_multiplication[k] = bin2[i] and bin1[j]
-               k -= 1
+                curr_multiplication[k] = bin2[i] and bin1[j]
+                k -= 1
         ans = add_binary(ans, curr_multiplication)
 
     if is_negative:
@@ -88,27 +90,37 @@ def div_binary(bin1, bin2):
     while binary_to_decimal(bin1) >= binary_to_decimal(bin2):
         bin1 = sub_binary(bin1, bin2)
         count += 1
-    
+
     ans = decimal_to_binary(count)
     return ans
 
+
 def factorial_binary(bin):
-    number = binary_to_decimal(bin)
+    decimal = binary_to_decimal(bin)
     ans = 1
-    for i in range(1, number + 1):
+    for i in range(1, decimal + 1):
         ans *= i
-    
+
     return decimal_to_binary(ans)
+
 
 def power_binary(bin1, bin2):
-    pass
+    decimal2 = binary_to_decimal(bin2)
+    if decimal2 < 0:
+        return 0
+    res = decimal_to_binary(1)
+    for _ in range(decimal2):
+        res = multiply_binary(res, bin1)
+    return res
+
 
 def mod_binary(bin1, bin2):
-    num1 = binary_to_decimal(bin1)
-    num2 = binary_to_decimal(bin2)
+    decimal1 = binary_to_decimal(bin1)
+    decimal2 = binary_to_decimal(bin2)
 
-    ans = num1 % num2
+    ans = decimal1 % decimal2
     return decimal_to_binary(ans)
+
 
 while True:
     print("Select Operation")
@@ -128,9 +140,9 @@ while True:
     num1 = int(input())
     bin1 = decimal_to_binary(num1)
     if operator != "!":
-       print("Enter the Second Number")
-       num2 = int(input())
-       bin2 = decimal_to_binary(num2)
+        print("Enter the Second Number")
+        num2 = int(input())
+        bin2 = decimal_to_binary(num2)
 
     if operator == "+":
         ans = add_binary(bin1, bin2)
@@ -139,7 +151,7 @@ while True:
         ans = sub_binary(bin1, bin2)
         print(binary_to_decimal(ans))
     elif operator == "*":
-        ans = mul_binary(bin1, bin2)
+        ans = multiply_binary(bin1, bin2)
         print(binary_to_decimal(ans))
     elif operator == "/":
         ans = div_binary(bin1, bin2)
@@ -155,4 +167,3 @@ while True:
         print(binary_to_decimal(ans))
     else:
         print("Invalid Input")
-    
