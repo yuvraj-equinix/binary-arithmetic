@@ -97,11 +97,14 @@ def div_binary(bin1, bin2):
 
 def factorial_binary(bin):
     decimal = binary_to_decimal(bin)
-    ans = 1
+    if decimal < 0:
+        return decimal_to_binary(0)
+    if decimal == 0:
+        return decimal_to_binary(1)
+    res = decimal_to_binary(1)
     for i in range(1, decimal + 1):
-        ans *= i
-
-    return decimal_to_binary(ans)
+        res = multiply_binary(res, decimal_to_binary(i))
+    return res
 
 
 def power_binary(bin1, bin2):
